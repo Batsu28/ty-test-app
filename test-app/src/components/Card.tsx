@@ -12,6 +12,7 @@ export default function Card(prop: MovieType): JSX.Element {
     http.open("HEAD", prop.poster, false);
     http.status != 404 ? setImgChecker(true) : setImgChecker(false);
   }, [prop.poster]);
+  console.log(imgChecker);
 
   return (
     <>

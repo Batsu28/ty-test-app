@@ -1,6 +1,6 @@
 import { strict } from "assert";
 import express, { Request, Response } from "express";
-import mongoose from "mongoose";
+import mongoose, { isObjectIdOrHexString } from "mongoose";
 import Movies from "../model/MovieModel";
 
 const MovieRoutes = express.Router();
@@ -21,8 +21,7 @@ MovieRoutes.get("/movies", async (req: Request, res: Response) => {
 
 MovieRoutes.get("/movie/:id", async (req: Request, res: Response) => {
   try {
-    let id = new mongoose.Types.ObjectId(req.params.id);
-
+    const id = new mongoose.Types.ObjectId(req.params.id.trim());
     console.log(id);
 
     const result = await Movies.findOne({ _id: id });
@@ -36,7 +35,11 @@ MovieRoutes.post("/movie", async (req: Request, res: Response) => {
   try {
     const genres: string[] = [];
     const result = await Movies.find({}).select({ genres: 1 });
-    // result.forEach((genre) => genres.push(...genre.genres));
+    result.forEach((select) =>
+      select.genres.map(
+        (genre) => !genres.includes(genre) && genres.push(genre)
+      )
+    );
 
     console.log(genres);
     // res.status(200).json(result);

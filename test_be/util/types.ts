@@ -1,5 +1,7 @@
+import mongoose from "mongoose";
+
 export interface FullMovieType {
-  _id: string;
+  _id: mongoose.Types.ObjectId;
   plot: string;
   genres: string[];
   runtime: number;

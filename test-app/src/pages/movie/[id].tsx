@@ -4,6 +4,7 @@ import axios from "axios";
 import { FullMovieType } from "@/util/Types";
 import { useEffect, useState } from "react";
 import NoImage from "@/components/NoImage";
+import Dropdown from "@/components/dropdown";
 
 export default function Movie(): JSX.Element {
   const [singleMovie, setSingleMovie] = useState<FullMovieType>();
@@ -34,6 +35,18 @@ export default function Movie(): JSX.Element {
 
   return (
     <>
+      <>
+        <div className="peer w-[100px] h-[40px] text-center bg-green-500 text-white hover:bg-white hover:border-2 hover:text-black text-white">
+          Dropdown
+        </div>
+        <div
+          className="hidden peer-hover:flex 
+         w-[200px]"
+        >
+          a
+        </div>
+        <Dropdown />
+      </>
       <div className="w-full flex">
         <Link href={"/"}>
           <button className="w-[100px] h-[40px] bg-green-500 text-white rounded-lg m-3">
